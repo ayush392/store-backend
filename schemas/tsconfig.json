@@ -1,19 +1,17 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "exactOptionalPropertyTypes": false,
-    "noUncheckedIndexedAccess": false,
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "noEmitOnError": true,
-    "rootDir": "src",
-    "outDir": "dist",
-    "types": ["node"],
-    "lib": ["ES2023"],
+    "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
+    "noEmitOnError": true,
     "incremental": true,
-    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.tsbuildinfo",
+    "rootDir": "src",
+    "outDir": "dist"
   },
   "include": ["src"],
   "exclude": ["dist", "node_modules"]

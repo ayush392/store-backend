@@ -1,11 +1,8 @@
 import { Request, Response } from 'express';
+import { CreateTransactionSchema, UpdateTransactionSchema } from 'schemas';
 import { parseBody } from '../../shared/parseBody';
 import { ObjectIdSchema } from '../../shared/schemas';
 import { successResponse } from '../../shared/successResponse';
-import {
-  CreateTransactionSchema,
-  UpdateTransactionSchema
-} from './transaction.schema';
 import { transactionService } from './transaction.service';
 
 export const transactionController = {
