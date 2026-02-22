@@ -1,5 +1,5 @@
 import mongoose, { InferSchemaType } from 'mongoose';
-import { SalaryTypeEnum } from '../features/staff/staff.schema';
+import { SalaryTypeEnum } from '../features/staff/staff.schema.js';
 
 const employmentSchema = new mongoose.Schema(
   {

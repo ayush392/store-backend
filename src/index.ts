@@ -1,7 +1,7 @@
-import app from './app';
-import { connectDB } from './config/db';
-import { env } from './config/env';
-import { logger } from './utils/logger';
+import app from './app.js';
+import { connectDB } from './config/db.js';
+import { env } from './config/env.js';
+import { logger } from './utils/logger.js';
 
 async function startServer() {
   await connectDB();

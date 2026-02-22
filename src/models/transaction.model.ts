@@ -1,5 +1,5 @@
 import mongoose, { InferSchemaType } from 'mongoose';
-import { TransactionTypeEnum } from '../features/transactions/transaction.schema';
+import { TransactionTypeEnum } from '../features/transactions/transaction.schema.js';
 
 const transactionSchema = new mongoose.Schema(
   {
@@ -16,7 +16,7 @@ const transactionSchema = new mongoose.Schema(
     amount: {
       type: Number,
       required: true,
-      min: 0
+      min: [0.01, 'Amount must be greater than 0']
     },
     amountChange: {
       type: Number,

@@ -1,9 +1,12 @@
 import { Request, Response } from 'express';
-import { CreateTransactionSchema, UpdateTransactionSchema } from 'schemas';
-import { parseBody } from '../../shared/parseBody';
-import { ObjectIdSchema } from '../../shared/schemas';
-import { successResponse } from '../../shared/successResponse';
-import { transactionService } from './transaction.service';
+import { parseBody } from '../../shared/parseBody.js';
+import { ObjectIdSchema } from '../../shared/schemas.js';
+import { successResponse } from '../../shared/successResponse.js';
+import {
+  CreateTransactionSchema,
+  UpdateTransactionSchema
+} from './transaction.schema.js';
+import { transactionService } from './transaction.service.js';
 
 export const transactionController = {
   createTransaction: async (req: Request, res: Response) => {

@@ -1,11 +1,11 @@
 import express from 'express';
 import './config/env';
-import accountRoutes from './features/accounts/account.routes';
-import authRoutes from './features/auth/auth.routes';
-import staffRoutes from './features/staff/staff.routes';
-import transRoutes from './features/transactions/transaction.routes';
-import { errorMiddleware } from './middlewares/error.middleware';
-import { successResponse } from './shared/successResponse';
+import accountRoutes from './features/accounts/account.routes.js';
+import authRoutes from './features/auth/auth.routes.js';
+import staffRoutes from './features/staff/staff.routes.js';
+import transRoutes from './features/transactions/transaction.routes.js';
+import { errorMiddleware } from './middlewares/error.middleware.js';
+import { successResponse } from './shared/successResponse.js';
 
 const app = express();
 

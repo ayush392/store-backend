@@ -1,16 +1,16 @@
 import { ClientSession } from 'mongoose';
-import accountModel from '../../models/account.model';
-import employmentModel, { Employment } from '../../models/employment.model';
-import { BadRequestError, NotFoundError } from '../../shared/appErrors';
-import { removeUndefined } from '../../shared/removeUndefined';
-import { ObjectId } from '../../shared/schemas';
-import { transactionService } from '../transactions/transaction.service';
+import accountModel from '../../models/account.model.js';
+import employmentModel, { Employment } from '../../models/employment.model.js';
+import { BadRequestError, NotFoundError } from '../../shared/appErrors.js';
+import { removeUndefined } from '../../shared/removeUndefined.js';
+import { ObjectId } from '../../shared/schemas.js';
+import { transactionService } from '../transactions/transaction.service.js';
 import {
   type AccountType,
   type CreateAccount,
   type UpdateAccount,
   type UpdateOutstanding
-} from './account.schema';
+} from './account.schema.js';
 
 export const accountService = {
   findAccountByIdAndType: async (

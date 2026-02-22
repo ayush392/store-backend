@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { DateOnlySchema, ObjectIdSchema } from '../../shared/schemas';
-import { BaseAccountSchema } from '../accounts/account.schema';
+import { DateOnlySchema, ObjectIdSchema } from '../../shared/schemas.js';
+import { BaseAccountSchema } from '../accounts/account.schema.js';
 
 export const AttendanceStatusEnum = z.enum(['PRESENT', 'ABSENT', 'HALF']);
 export const SalaryTypeEnum = z.enum(['DAILY', 'MONTHLY']);

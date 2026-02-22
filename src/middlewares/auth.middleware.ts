@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { UnauthorizedError } from '../shared/appErrors';
-import { verifyToken } from '../utils/jwt';
+import { UnauthorizedError } from '../shared/appErrors.js';
+import { verifyToken } from '../utils/jwt.js';
 
 /*
  * authenticateToken is required when “Anyone can view posts, but logged-in users can see extra info.”

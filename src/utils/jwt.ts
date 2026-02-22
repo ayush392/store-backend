@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
-import { env } from '../config/env';
-import { UserRoleEnum } from '../features/auth/auth.schema';
-import { UnauthorizedError } from '../shared/appErrors';
+import { env } from '../config/env.js';
+import { UserRoleEnum } from '../features/auth/auth.schema.js';
+import { UnauthorizedError } from '../shared/appErrors.js';
 
 export const JwtPayloadSchema = z.object({
   sub: z.string(), // user id
@@ -23,7 +23,9 @@ export const createToken = (payload: JwtPayload) => {
 //  Verify + validate token
 export function verifyToken(token: string): JwtPayload {
   try {
-    const decoded = jwt.verify(token, env.JWT_SECRET);
+    const decoded = jwt.verify(token, env.JWT_SECRET, {
+      algorithms: ['HS256']
+    });
     return JwtPayloadSchema.parse(decoded);
   } catch (error) {
     throw new UnauthorizedError('Invalid or expired token');

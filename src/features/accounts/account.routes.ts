@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { requireAuth } from '../../middlewares/auth.middleware';
-import { requireRole } from '../../middlewares/rbac.middleware';
-import { UserRoleEnum } from '../auth/auth.schema';
-import { accountController } from './account.controller';
+import { requireAuth } from '../../middlewares/auth.middleware.js';
+import { requireRole } from '../../middlewares/rbac.middleware.js';
+import { UserRoleEnum } from '../auth/auth.schema.js';
+import { accountController } from './account.controller.js';
 
 const accountRoutes = Router();
 

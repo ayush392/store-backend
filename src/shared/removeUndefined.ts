@@ -1,4 +1,4 @@
-import { BadRequestError } from './appErrors';
+import { BadRequestError } from './appErrors.js';
 
 export function removeUndefined<T extends Record<string, any>>(obj: T) {
   const data = Object.fromEntries(

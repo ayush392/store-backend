@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { parseBody } from '../../shared/parseBody';
-import { ObjectIdSchema } from '../../shared/schemas';
-import { successResponse } from '../../shared/successResponse';
+import { parseBody } from '../../shared/parseBody.js';
+import { ObjectIdSchema } from '../../shared/schemas.js';
+import { successResponse } from '../../shared/successResponse.js';
 import {
   AttendanceQuerySchema,
   AttendanceSchema,
@@ -9,8 +9,8 @@ import {
   CreateEmploymentSchema,
   CreateStaffSchema,
   DeleteEmploymentSchema
-} from './staff.schema';
-import { staffService } from './staff.service';
+} from './staff.schema.js';
+import { staffService } from './staff.service.js';
 
 export const staffController = {
   createEmployment: async (req: Request, res: Response) => {

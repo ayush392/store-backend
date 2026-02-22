@@ -1,5 +1,5 @@
-import { logger } from '../utils/logger';
-import { DateOnlySchema } from './schemas';
+import { logger } from '../utils/logger.js';
+import { DateOnlySchema } from './schemas.js';
 
 const IST_FORMATTER = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Kolkata',

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { UserRoleEnum, type UserRole } from '../features/auth/auth.schema';
-import { ForbiddenError, UnauthorizedError } from '../shared/appErrors';
+import { UserRoleEnum, type UserRole } from '../features/auth/auth.schema.js';
+import { ForbiddenError, UnauthorizedError } from '../shared/appErrors.js';
 
 export const requireRole = (allowedRoles: UserRole[]) => {
   return (req: Request, _res: Response, next: NextFunction) => {

@@ -1,5 +1,5 @@
-import { TransactionType } from '../features/transactions/transaction.schema';
-import { TRANSACTION_EFFECT } from './constant';
+import { TransactionType } from '../features/transactions/transaction.schema.js';
+import { TRANSACTION_EFFECT } from './constant.js';
 
 export const getDiffAmount = (
   type: TransactionType,

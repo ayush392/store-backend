@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { env } from '../config/env';
+import { env } from '../config/env.js';
 
 export const getHashedString = async (text: string) => {
   const rounds = env.SALT_ROUNDS;
@@ -8,5 +8,5 @@ export const getHashedString = async (text: string) => {
 };
 
 export const isValidHash = async (text: string, hash: string) => {
-  return await bcrypt.compare(text, hash);
+  return bcrypt.compare(text, hash);
 };

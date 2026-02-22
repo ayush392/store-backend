@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BadRequestError } from './appErrors';
+import { BadRequestError } from './appErrors.js';
 
 export const parseBody = <S extends z.ZodType>(
   body: unknown,

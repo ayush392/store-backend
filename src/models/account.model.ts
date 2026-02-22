@@ -1,5 +1,5 @@
 import mongoose, { InferSchemaType } from 'mongoose';
-import { AccountTypeEnum } from '../features/accounts/account.schema';
+import { AccountTypeEnum } from '../features/accounts/account.schema.js';
 
 const accountSchema = new mongoose.Schema(
   {

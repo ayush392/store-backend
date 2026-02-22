@@ -1,7 +1,7 @@
 import {
   TransactionType,
   TransactionTypeEnum
-} from '../features/transactions/transaction.schema';
+} from '../features/transactions/transaction.schema.js';
 
 // applicable for staff only
 export const STAFF_ONLY_TRANSACTION_TYPES: readonly TransactionType[] = [

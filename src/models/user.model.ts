@@ -1,5 +1,5 @@
 import mongoose, { InferSchemaType } from 'mongoose';
-import { UserRoleEnum } from '../features/auth/auth.schema';
+import { UserRoleEnum } from '../features/auth/auth.schema.js';
 
 const userSchema = new mongoose.Schema(
   {

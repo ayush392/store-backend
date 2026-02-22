@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import z from 'zod';
+import { z } from 'zod';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -36,8 +36,10 @@ const envSchema = z.object({
 const parsed = envSchema.safeParse(process.env);
 
 if (!parsed.success) {
-  console.error('Invalid environment variables ', parsed.error);
-  console.error(JSON.stringify(parsed.error.format(), null, 2));
+  console.error('Environment validation failed. Check the following fields:');
+  console.error('Environment validation failed. Check the following fields:');
+  const issues = parsed.error.issues.map((i) => i.path.join('.'));
+  console.error(issues.join(', '));
   process.exit(1);
 }
 

@@ -1,13 +1,13 @@
-import userModel from '../../models/user.model';
+import userModel from '../../models/user.model.js';
 import {
   BadRequestError,
   ForbiddenError,
   NotFoundError
-} from '../../shared/appErrors';
-import { ObjectId } from '../../shared/schemas';
-import { getHashedString, isValidHash } from '../../utils/bcrypt';
-import { createToken } from '../../utils/jwt';
-import type { LoginUser, RegisterUser, UserRole } from './auth.schema';
+} from '../../shared/appErrors.js';
+import { ObjectId } from '../../shared/schemas.js';
+import { getHashedString, isValidHash } from '../../utils/bcrypt.js';
+import { createToken } from '../../utils/jwt.js';
+import type { LoginUser, RegisterUser, UserRole } from './auth.schema.js';
 
 export const authService = {
   login: async ({ phone, password }: LoginUser) => {

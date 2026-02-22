@@ -1,5 +1,5 @@
 import mongoose, { InferSchemaType } from 'mongoose';
-import { AttendanceStatusEnum } from '../features/staff/staff.schema';
+import { AttendanceStatusEnum } from '../features/staff/staff.schema.js';
 
 const attendanceSchema = new mongoose.Schema(
   {

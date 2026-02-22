@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { parseBody } from '../../shared/parseBody';
-import { ObjectIdSchema } from '../../shared/schemas';
-import { successResponse } from '../../shared/successResponse';
-import { CreateAccountSchema, UpdateAccountSchema } from './account.schema';
-import { accountService } from './account.service';
+import { parseBody } from '../../shared/parseBody.js';
+import { ObjectIdSchema } from '../../shared/schemas.js';
+import { successResponse } from '../../shared/successResponse.js';
+import { CreateAccountSchema, UpdateAccountSchema } from './account.schema.js';
+import { accountService } from './account.service.js';
 
 export const accountController = {
   createAccount: async (req: Request, res: Response) => {

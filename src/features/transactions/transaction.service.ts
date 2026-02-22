@@ -1,17 +1,17 @@
-import transactionModel from '../../models/transaction.model';
-import transactionHistoryModel from '../../models/transactionHistory.model';
-import { BadRequestError, NotFoundError } from '../../shared/appErrors';
-import { getDiffAmount } from '../../shared/calculation';
+import transactionModel from '../../models/transaction.model.js';
+import transactionHistoryModel from '../../models/transactionHistory.model.js';
+import { BadRequestError, NotFoundError } from '../../shared/appErrors.js';
+import { getDiffAmount } from '../../shared/calculation.js';
 import {
   STAFF_ONLY_TRANSACTION_TYPES,
   TRANSACTION_EFFECT
-} from '../../shared/constant';
-import { getDateRange, istDateString } from '../../shared/date';
-import { removeUndefined } from '../../shared/removeUndefined';
-import { ObjectId } from '../../shared/schemas';
-import { runTransaction } from '../../utils/runTransaction';
-import { accountService } from '../accounts/account.service';
-import { CreateTransaction, UpdateTransaction } from './transaction.schema';
+} from '../../shared/constant.js';
+import { getDateRange, istDateString } from '../../shared/date.js';
+import { removeUndefined } from '../../shared/removeUndefined.js';
+import { ObjectId } from '../../shared/schemas.js';
+import { runTransaction } from '../../utils/runTransaction.js';
+import { accountService } from '../accounts/account.service.js';
+import { CreateTransaction, UpdateTransaction } from './transaction.schema.js';
 
 export const transactionService = {
   create: async (createdBy: ObjectId, transaction: CreateTransaction) => {

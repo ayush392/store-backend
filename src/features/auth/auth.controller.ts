@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { parseBody } from '../../shared/parseBody';
-import { ObjectIdSchema } from '../../shared/schemas';
-import { successResponse } from '../../shared/successResponse';
-import { LoginUserSchema, RegisterUserSchema } from './auth.schema';
-import { authService } from './auth.service';
+import { parseBody } from '../../shared/parseBody.js';
+import { ObjectIdSchema } from '../../shared/schemas.js';
+import { successResponse } from '../../shared/successResponse.js';
+import { LoginUserSchema, RegisterUserSchema } from './auth.schema.js';
+import { authService } from './auth.service.js';
 
 export const authController = {
   login: async (req: Request, res: Response) => {

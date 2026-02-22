@@ -1,19 +1,23 @@
 import { ClientSession } from 'mongoose';
-import accountModel from '../../models/account.model';
-import attendanceModel from '../../models/attendance.model';
-import employmentModel from '../../models/employment.model';
-import { BadRequestError } from '../../shared/appErrors';
-import { getDateRange, getMonthRange, parseISTDate } from '../../shared/date';
-import { DateOnly, ObjectId } from '../../shared/schemas';
-import { runTransaction } from '../../utils/runTransaction';
-import { accountService } from '../accounts/account.service';
+import accountModel from '../../models/account.model.js';
+import attendanceModel from '../../models/attendance.model.js';
+import employmentModel from '../../models/employment.model.js';
+import { BadRequestError } from '../../shared/appErrors.js';
+import {
+  getDateRange,
+  getMonthRange,
+  parseISTDate
+} from '../../shared/date.js';
+import { DateOnly, ObjectId } from '../../shared/schemas.js';
+import { runTransaction } from '../../utils/runTransaction.js';
+import { accountService } from '../accounts/account.service.js';
 import {
   Attendance,
   AttendanceQuery,
   BulkAttendance,
   CreateEmployment,
   CreateStaff
-} from './staff.schema';
+} from './staff.schema.js';
 
 export const staffService = {
   createEmployment: async (
@@ -219,7 +223,7 @@ export const staffService = {
     const attendanceList = await attendanceModel.find({
       accountId,
       date: { $gte: startDate, $lt: endDate },
-      ...(employmentId && { employmentId: employmentId })
+      ...(employmentId && { employmentId })
     });
 
     return attendanceList;

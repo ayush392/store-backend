@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { logger } from '../utils/logger';
-import { env } from './env';
+import { logger } from '../utils/logger.js';
+import { env } from './env.js';
 
 //NOTE: This connection setting is optimised for serverless (AWS/lambda)
 
