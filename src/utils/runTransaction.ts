@@ -20,6 +20,6 @@ export const runTransaction = async <T>(
     }
     throw error;
   } finally {
-    session.endSession();
+    await session.endSession();
   }
 };

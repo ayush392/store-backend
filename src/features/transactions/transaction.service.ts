@@ -46,6 +46,11 @@ export const transactionService = {
         ],
         { session }
       );
+
+      if (!trans) {
+        throw new BadRequestError('Could not create transaction');
+      }
+
       await accountService.updateOutstanding(
         { accountId, diffAmount },
         session

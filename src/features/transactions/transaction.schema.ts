@@ -16,7 +16,7 @@ export const CreateTransactionSchema = z.object({
   transactionType: TransactionTypeEnum,
   amount: z.number().positive('Amount must be greater than 0'),
   date: DateTimeSchema,
-  note: z.string().optional()
+  note: z.string().default('')
 });
 
 export const UpdateTransactionSchema = CreateTransactionSchema.omit({

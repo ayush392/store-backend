@@ -23,7 +23,11 @@ const envSchema = z.object({
     .min(32, 'JWT_SECRET must be at least 32 characters')
     .regex(/[A-Z]/, 'JWT_SECRET must contain an uppercase letter')
     .regex(/[a-z]/, 'JWT_SECRET must contain a lowercase letter')
-    .regex(/[0-9]/, 'JWT_SECRET must contain a number'),
+    .regex(/[0-9]/, 'JWT_SECRET must contain a number')
+    .regex(
+      /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
+      'JWT_SECRET must contain a special character'
+    ),
   MONGO_URI: z
     .string()
     .min(1)
@@ -36,7 +40,6 @@ const envSchema = z.object({
 const parsed = envSchema.safeParse(process.env);
 
 if (!parsed.success) {
-  console.error('Environment validation failed. Check the following fields:');
   console.error('Environment validation failed. Check the following fields:');
   const issues = parsed.error.issues.map((i) => i.path.join('.'));
   console.error(issues.join(', '));

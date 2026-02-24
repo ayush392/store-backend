@@ -1,4 +1,4 @@
-import mongoose, { InferSchemaType } from 'mongoose';
+import mongoose from 'mongoose';
 import { TransactionTypeEnum } from '../features/transactions/transaction.schema.js';
 
 const transactionSchema = new mongoose.Schema(
@@ -45,5 +45,4 @@ const transactionSchema = new mongoose.Schema(
 );
 transactionSchema.index({ accountId: 1, isDeleted: 1 });
 transactionSchema.index({ date: -1 });
-export type Transaction = InferSchemaType<typeof transactionSchema>;
-export default mongoose.model<Transaction>('Transaction', transactionSchema);
+export default mongoose.model('Transaction', transactionSchema);

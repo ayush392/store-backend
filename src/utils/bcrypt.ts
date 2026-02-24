@@ -8,5 +8,6 @@ export const getHashedString = async (text: string) => {
 };
 
 export const isValidHash = async (text: string, hash: string) => {
-  return bcrypt.compare(text, hash);
+  const isValid = await bcrypt.compare(text, hash);
+  return isValid;
 };

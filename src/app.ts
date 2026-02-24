@@ -1,5 +1,5 @@
 import express from 'express';
-import './config/env';
+import './config/env.js';
 import accountRoutes from './features/accounts/account.routes.js';
 import authRoutes from './features/auth/auth.routes.js';
 import staffRoutes from './features/staff/staff.routes.js';
