@@ -1,4 +1,5 @@
 import { logger } from '../utils/logger.js';
+import { BadRequestError } from './appErrors.js';
 import { DateOnlySchema } from './schemas.js';
 
 const IST_FORMATTER = new Intl.DateTimeFormat('en-CA', {
@@ -41,7 +42,7 @@ export const getDateRange = (from: string, to?: string) => {
 
 export const getMonthRange = (month: number, year: number) => {
   if (month < 1 || month > 12) {
-    throw new Error('Month must be between 1 and 12');
+    throw new BadRequestError('Month must be between 1 and 12');
   }
   const monthStr = `${year}-${String(month).padStart(2, '0')}-01`;
   const start = parseISTDate(monthStr);

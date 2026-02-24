@@ -20,6 +20,10 @@ export const runTransaction = async <T>(
     }
     throw error;
   } finally {
-    await session.endSession();
+    try {
+      await session.endSession();
+    } catch (endError) {
+      console.error('Failed to end session:', endError);
+    }
   }
 };
