@@ -1,3 +1,4 @@
+import { CreateTransaction, UpdateTransaction } from '@store/schemas';
 import transactionModel from '../../models/transaction.model.js';
 import transactionHistoryModel from '../../models/transactionHistory.model.js';
 import { BadRequestError, NotFoundError } from '../../shared/appErrors.js';
@@ -7,19 +8,23 @@ import {
   TRANSACTION_EFFECT
 } from '../../shared/constant.js';
 import { getDateRange, istDateString } from '../../shared/date.js';
+import { parseBody } from '../../shared/parseBody.js';
 import { removeUndefined } from '../../shared/removeUndefined.js';
-import { ObjectId } from '../../shared/schemas.js';
+import { ObjectId, ObjectIdSchema } from '../../shared/schemas.js';
 import { runTransaction } from '../../utils/runTransaction.js';
 import { accountService } from '../accounts/account.service.js';
-import { CreateTransaction, UpdateTransaction } from './transaction.schema.js';
 
 export const transactionService = {
   create: async (createdBy: ObjectId, transaction: CreateTransaction) => {
     const { accountId, transactionType, amount, date, note } = transaction;
+    const accountIdObj = parseBody(accountId, ObjectIdSchema);
     const result = await runTransaction(async (session) => {
-      const account = await accountService.findAccountByIdAndType(accountId, {
-        session
-      });
+      const account = await accountService.findAccountByIdAndType(
+        accountIdObj,
+        {
+          session
+        }
+      );
       if (!account) throw new NotFoundError('Account not found');
 
       if (
@@ -104,7 +109,7 @@ export const transactionService = {
       );
 
       await accountService.updateOutstanding(
-        { accountId: existingTransaction.accountId, diffAmount },
+        { accountId: existingTransaction.accountId.toString(), diffAmount },
         session
       );
 
@@ -162,7 +167,7 @@ export const transactionService = {
 
       const newOutstanding = await accountService.updateOutstanding(
         {
-          accountId: transaction.accountId,
+          accountId: transaction.accountId.toString(),
           diffAmount: -1 * transaction.amountChange // -1 because amount needs to be reversed
         },
         session

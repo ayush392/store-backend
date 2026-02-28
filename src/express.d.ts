@@ -1,4 +1,4 @@
-import { UserRole } from './features/auth/auth.schema.js';
+import { UserRole } from '@store/schemas';
 
 declare global {
   namespace Express {

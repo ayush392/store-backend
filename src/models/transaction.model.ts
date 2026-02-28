@@ -1,5 +1,5 @@
+import { Transaction } from '@store/schemas';
 import mongoose from 'mongoose';
-import { TransactionTypeEnum } from '../features/transactions/transaction.schema.js';
 
 const transactionSchema = new mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const transactionSchema = new mongoose.Schema(
     transactionType: {
       type: String,
       required: true,
-      enum: TransactionTypeEnum.options
+      enum: Transaction.TransactionTypeEnum.options
     },
     amount: {
       type: Number,

@@ -1,16 +1,13 @@
+import { Transaction } from '@store/schemas';
 import { Request, Response } from 'express';
 import { parseBody } from '../../shared/parseBody.js';
 import { ObjectIdSchema } from '../../shared/schemas.js';
 import { successResponse } from '../../shared/successResponse.js';
-import {
-  CreateTransactionSchema,
-  UpdateTransactionSchema
-} from './transaction.schema.js';
 import { transactionService } from './transaction.service.js';
 
 export const transactionController = {
   createTransaction: async (req: Request, res: Response) => {
-    const body = parseBody(req.body, CreateTransactionSchema);
+    const body = parseBody(req.body, Transaction.CreateTransactionSchema);
     const createdBy = parseBody(req.user?.userId, ObjectIdSchema);
     const data = await transactionService.create(createdBy, body);
 
@@ -22,7 +19,7 @@ export const transactionController = {
   },
 
   editTransaction: async (req: Request, res: Response) => {
-    const body = parseBody(req.body, UpdateTransactionSchema);
+    const body = parseBody(req.body, Transaction.UpdateTransactionSchema);
     const transactionId = parseBody(req.params.transactionId, ObjectIdSchema);
     const editedBy = parseBody(req.user?.userId, ObjectIdSchema);
     const data = await transactionService.edit(transactionId, editedBy, body);

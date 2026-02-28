@@ -1,13 +1,13 @@
+import { Account } from '@store/schemas';
 import { Request, Response } from 'express';
 import { parseBody } from '../../shared/parseBody.js';
 import { ObjectIdSchema } from '../../shared/schemas.js';
 import { successResponse } from '../../shared/successResponse.js';
-import { CreateAccountSchema, UpdateAccountSchema } from './account.schema.js';
 import { accountService } from './account.service.js';
 
 export const accountController = {
   createAccount: async (req: Request, res: Response) => {
-    const body = parseBody(req.body, CreateAccountSchema);
+    const body = parseBody(req.body, Account.CreateAccountSchema);
     const data = await accountService.create(body);
 
     return successResponse(res, {
@@ -18,7 +18,7 @@ export const accountController = {
   },
 
   updateAccount: async (req: Request, res: Response) => {
-    const body = parseBody(req.body, UpdateAccountSchema);
+    const body = parseBody(req.body, Account.UpdateAccountSchema);
     const accountId = parseBody(req.params.accountId, ObjectIdSchema);
     const data = await accountService.update(accountId, body);
 

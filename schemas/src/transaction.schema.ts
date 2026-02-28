@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { DateTimeSchema, ObjectIdSchema } from '../../shared/schemas.js';
+import { DateTimeSchema, ObjectIdSchema } from './common.schema.js';
 
 export const TransactionTypeEnum = z.enum([
   'UDHAAR',

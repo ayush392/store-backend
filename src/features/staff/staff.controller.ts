@@ -1,20 +1,13 @@
+import { Staff } from '@store/schemas';
 import { Request, Response } from 'express';
 import { parseBody } from '../../shared/parseBody.js';
 import { ObjectIdSchema } from '../../shared/schemas.js';
 import { successResponse } from '../../shared/successResponse.js';
-import {
-  AttendanceQuerySchema,
-  AttendanceSchema,
-  BulkAttendanceSchema,
-  CreateEmploymentSchema,
-  CreateStaffSchema,
-  DeleteEmploymentSchema
-} from './staff.schema.js';
 import { staffService } from './staff.service.js';
 
 export const staffController = {
   createEmployment: async (req: Request, res: Response) => {
-    const body = parseBody(req.body, CreateEmploymentSchema);
+    const body = parseBody(req.body, Staff.CreateEmploymentSchema);
     const accountId = parseBody(req.params.accountId, ObjectIdSchema);
     const data = await staffService.createEmployment(accountId, body);
 
@@ -26,7 +19,7 @@ export const staffController = {
   },
 
   deleteEmployment: async (req: Request, res: Response) => {
-    const { leaveDate } = parseBody(req.body, DeleteEmploymentSchema);
+    const { leaveDate } = parseBody(req.body, Staff.DeleteEmploymentSchema);
     const employmentId = parseBody(req.params.employmentId, ObjectIdSchema);
     const data = await staffService.deleteEmployment(employmentId, leaveDate);
 
@@ -38,7 +31,7 @@ export const staffController = {
   },
 
   createStaffWithEmployment: async (req: Request, res: Response) => {
-    const body = parseBody(req.body, CreateStaffSchema);
+    const body = parseBody(req.body, Staff.CreateStaffSchema);
     const data = await staffService.createStaffwithEmployment(body);
 
     return successResponse(res, {
@@ -58,7 +51,7 @@ export const staffController = {
   },
 
   markBulkAttendance: async (req: Request, res: Response) => {
-    const body = parseBody(req.body, BulkAttendanceSchema);
+    const body = parseBody(req.body, Staff.BulkAttendanceSchema);
     const data = await staffService.markBulkAttendance(body);
 
     return successResponse(res, {
@@ -69,7 +62,7 @@ export const staffController = {
   },
 
   markAttendance: async (req: Request, res: Response) => {
-    const body = parseBody(req.body, AttendanceSchema);
+    const body = parseBody(req.body, Staff.AttendanceSchema);
     const data = await staffService.markAttendance(body);
 
     return successResponse(res, {
@@ -81,7 +74,7 @@ export const staffController = {
 
   getAttendance: async (req: Request, res: Response) => {
     const accountId = parseBody(req.params.accountId, ObjectIdSchema);
-    const query = parseBody(req.query, AttendanceQuerySchema);
+    const query = parseBody(req.query, Staff.AttendanceQuerySchema);
     const data = await staffService.getAttendance(accountId, query);
 
     return successResponse(res, {

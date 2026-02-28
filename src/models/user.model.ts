@@ -1,5 +1,5 @@
+import { Auth } from '@store/schemas';
 import mongoose, { InferSchemaType } from 'mongoose';
-import { UserRoleEnum } from '../features/auth/auth.schema.js';
 
 const userSchema = new mongoose.Schema(
   {
@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
-      enum: UserRoleEnum.options
+      enum: Auth.UserRoleEnum.options
     },
     isActive: {
       type: Boolean,

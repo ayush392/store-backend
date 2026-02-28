@@ -1,3 +1,11 @@
+import {
+  Attendance,
+  AttendanceQuery,
+  BulkAttendance,
+  CreateEmployment,
+  CreateStaff,
+  DateOnly
+} from '@store/schemas';
 import { ClientSession } from 'mongoose';
 import accountModel from '../../models/account.model.js';
 import attendanceModel from '../../models/attendance.model.js';
@@ -8,16 +16,10 @@ import {
   getMonthRange,
   parseISTDate
 } from '../../shared/date.js';
-import { DateOnly, ObjectId } from '../../shared/schemas.js';
+import { parseBody } from '../../shared/parseBody.js';
+import { ObjectId, ObjectIdSchema } from '../../shared/schemas.js';
 import { runTransaction } from '../../utils/runTransaction.js';
 import { accountService } from '../accounts/account.service.js';
-import {
-  Attendance,
-  AttendanceQuery,
-  BulkAttendance,
-  CreateEmployment,
-  CreateStaff
-} from './staff.schema.js';
 
 export const staffService = {
   createEmployment: async (
@@ -139,9 +141,7 @@ export const staffService = {
   // attendance
   markBulkAttendance: async (attendances: BulkAttendance) => {
     const todayDate = parseISTDate();
-    const employmentIds = [
-      ...new Set(attendances.map((a) => a.employmentId.toString()))
-    ];
+    const employmentIds = [...new Set(attendances.map((a) => a.employmentId))];
     const activeEmployments = await employmentModel
       .find({
         _id: { $in: employmentIds },
@@ -180,7 +180,7 @@ export const staffService = {
           },
           update: {
             $set: { status: a.status },
-            $setOnInsert: { accountId: a.accountId }
+            $setOnInsert: { accountId: parseBody(a.accountId, ObjectIdSchema) }
           },
           upsert: true
         }

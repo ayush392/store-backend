@@ -1,5 +1,5 @@
+import { Auth, UserRole } from '@store/schemas';
 import { NextFunction, Request, Response } from 'express';
-import { UserRoleEnum, type UserRole } from '../features/auth/auth.schema.js';
 import { ForbiddenError, UnauthorizedError } from '../shared/appErrors.js';
 
 export const requireRole = (allowedRoles: UserRole[]) => {
@@ -9,7 +9,7 @@ export const requireRole = (allowedRoles: UserRole[]) => {
     const userRole = req.user.role;
 
     // Admin has all the permissions
-    if (userRole === UserRoleEnum.enum.ADMIN) {
+    if (userRole === Auth.UserRoleEnum.enum.ADMIN) {
       return next();
     }
 

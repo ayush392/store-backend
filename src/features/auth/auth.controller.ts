@@ -1,13 +1,13 @@
+import { Auth } from '@store/schemas';
 import { Request, Response } from 'express';
 import { parseBody } from '../../shared/parseBody.js';
 import { ObjectIdSchema } from '../../shared/schemas.js';
 import { successResponse } from '../../shared/successResponse.js';
-import { LoginUserSchema, RegisterUserSchema } from './auth.schema.js';
 import { authService } from './auth.service.js';
 
 export const authController = {
   login: async (req: Request, res: Response) => {
-    const { phone, password } = parseBody(req.body, LoginUserSchema);
+    const { phone, password } = parseBody(req.body, Auth.LoginUserSchema);
 
     const data = await authService.login({ phone, password });
 
@@ -19,7 +19,10 @@ export const authController = {
   },
 
   register: async (req: Request, res: Response) => {
-    const { name, phone, password } = parseBody(req.body, RegisterUserSchema);
+    const { name, phone, password } = parseBody(
+      req.body,
+      Auth.RegisterUserSchema
+    );
 
     const data = await authService.register({ name, phone, password });
 

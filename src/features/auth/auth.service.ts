@@ -1,3 +1,4 @@
+import { Auth } from '@store/schemas';
 import userModel from '../../models/user.model.js';
 import {
   BadRequestError,
@@ -7,10 +8,9 @@ import {
 import { ObjectId } from '../../shared/schemas.js';
 import { getHashedString, isValidHash } from '../../utils/bcrypt.js';
 import { createToken } from '../../utils/jwt.js';
-import type { LoginUser, RegisterUser, UserRole } from './auth.schema.js';
 
 export const authService = {
-  login: async ({ phone, password }: LoginUser) => {
+  login: async ({ phone, password }: Auth.LoginUser) => {
     const user = await userModel
       .findOne({ phone })
       .select('+passwordHash')
@@ -36,8 +36,8 @@ export const authService = {
     return { name: user.name, role: user.role, token };
   },
 
-  register: async ({ name, phone, password }: RegisterUser) => {
-    const role: UserRole = 'USER';
+  register: async ({ name, phone, password }: Auth.RegisterUser) => {
+    const role: Auth.UserRole = 'USER';
     const hashPassword = await getHashedString(password);
     try {
       const newUser = await userModel.create({
