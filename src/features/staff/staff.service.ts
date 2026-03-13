@@ -138,6 +138,85 @@ export const staffService = {
     return result;
   },
 
+  //This query is time efficient than previous one
+  getStaffsAgg: async () => {
+    const { startDate, endDate } = getDateRange('today');
+
+    const result = await employmentModel.aggregate([
+      {
+        $match: { isActive: true }
+      },
+
+      {
+        $lookup: {
+          from: 'accounts',
+          localField: 'accountId',
+          foreignField: '_id',
+          pipeline: [
+            {
+              $project: {
+                name: 1,
+                displayName: 1,
+                currentOutstanding: 1,
+                isActive: 1
+              }
+            }
+          ],
+          as: 'account'
+        }
+      },
+
+      {
+        $unwind: '$account'
+      },
+
+      {
+        $lookup: {
+          from: 'attendances',
+          let: { empId: '$_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ['$employmentId', '$$empId'] },
+                    { $gte: ['$date', startDate] },
+                    { $lt: ['$date', endDate] }
+                  ]
+                }
+              }
+            },
+            {
+              $project: {
+                status: 1,
+                _id: 0
+              }
+            }
+          ],
+          as: 'attendance'
+        }
+      },
+
+      {
+        $addFields: {
+          status: { $arrayElemAt: ['$attendance.status', 0] }
+        }
+      },
+
+      {
+        $project: {
+          employmentId: '$_id',
+          account: '$account',
+          salary: 1,
+          salaryType: 1,
+          status: 1
+        }
+      }
+    ]);
+
+    return result;
+  },
+
   // attendance
   markBulkAttendance: async (attendances: BulkAttendance) => {
     const todayDate = parseISTDate();

@@ -15,7 +15,7 @@ app.get('/', (_req, res) => {
   successResponse(res, { message: 'Hello World!', data: null });
 });
 
-app.use('/api/v1/user', authRoutes);
+app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/account', accountRoutes);
 app.use('/api/v1/transaction', transRoutes);
 app.use('/api/v1/staff', staffRoutes);
