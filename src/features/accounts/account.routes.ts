@@ -10,6 +10,7 @@ accountRoutes.use(requireAuth);
 
 accountRoutes.use(requireRole([Auth.UserRoleEnum.enum.OWNER]));
 
+accountRoutes.get('/', accountController.getAccount);
 accountRoutes.post('/', accountController.createAccount);
 accountRoutes.get('/:accountId', accountController.userProfile);
 accountRoutes.patch('/:accountId', accountController.updateAccount);

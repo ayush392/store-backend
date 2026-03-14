@@ -1,4 +1,5 @@
 import type {
+  AccountQuery,
   AccountType,
   CreateAccount,
   UpdateAccount,
@@ -79,6 +80,19 @@ export const accountService = {
 
     return newAccount;
   },
+
+  get: async (query: AccountQuery) => {
+    const { accountType } = query;
+
+    const data = await accountModel
+      .find({ accountType })
+      .select('name displayName phone address currentOutstanding isActive')
+      .sort({ name: 1 })
+      .lean();
+
+    return data;
+  },
+
   update: async (accountId: ObjectId, account: UpdateAccount) => {
     const dataToUpdate = removeUndefined(account);
 
