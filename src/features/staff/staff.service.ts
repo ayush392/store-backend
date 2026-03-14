@@ -48,7 +48,7 @@ export const staffService = {
     const staff = await employmentModel.findOneAndUpdate(
       { _id: employmentId, isActive: true, joinDate: { $lt: leaveDate } },
       { $set: { leaveDate, isActive: false } },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
 
     if (!staff) {

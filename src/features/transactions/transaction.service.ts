@@ -78,7 +78,7 @@ export const transactionService = {
         const updatedTrans = await transactionModel.findOneAndUpdate(
           { _id: transactionId, isDeleted: false },
           { $set: data },
-          { new: true, runValidators: true, session }
+          { returnDocument: 'after', runValidators: true, session }
         );
 
         if (!updatedTrans)
@@ -116,7 +116,7 @@ export const transactionService = {
       const updatedTransaction = await transactionModel.findOneAndUpdate(
         { _id: transactionId, isDeleted: false },
         { $set: { ...data, amountChange } },
-        { new: true, runValidators: true, session }
+        { returnDocument: 'after', runValidators: true, session }
       );
 
       if (!updatedTransaction)
@@ -146,7 +146,7 @@ export const transactionService = {
       const transaction = await transactionModel.findOneAndUpdate(
         { _id: transactionId, isDeleted: false },
         { isDeleted: true },
-        { new: true, session }
+        { returnDocument: 'after', session }
       );
 
       if (!transaction)
