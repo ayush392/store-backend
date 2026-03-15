@@ -103,22 +103,24 @@ export const staffService = {
   getStaffs: async () => {
     const { startDate, endDate } = getDateRange('today');
 
-    const employments = await employmentModel
-      .find({ isActive: true })
-      .select('accountId salaryType salary')
-      .populate({
-        path: 'accountId',
-        model: 'Account',
-        select: 'name currentOutstanding isActive'
-      })
-      .lean();
-
-    const attendances = await attendanceModel
-      .find({
-        date: { $gte: startDate, $lt: endDate }
-      })
-      .select('date status employmentId')
-      .lean();
+    const [employments, attendances] = await Promise.all([
+      employmentModel
+        .find({ isActive: true })
+        .select('accountId salaryType salary')
+        .populate({
+          path: 'accountId',
+          match: { isActive: true, accountType: 'STAFF' },
+          model: 'Account',
+          select: 'name currentOutstanding isActive'
+        })
+        .lean(),
+      attendanceModel
+        .find({
+          date: { $gte: startDate, $lt: endDate }
+        })
+        .select('date status employmentId')
+        .lean()
+    ]);
 
     const attendanceMap = new Map(
       attendances.map((att) => [att.employmentId?.toString(), att])
