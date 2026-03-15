@@ -12,11 +12,16 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
     .default('development'),
-  PORT: z.coerce.number().default(3000),
+  PORT: z.coerce.number().default(5000),
   ALLOWED_ORIGINS: z
     .string()
-    .default('http://localhost:3000')
-    .transform((v) => v.split(',').map((o) => o.trim())),
+    .transform((str) =>
+      str
+        .split(',')
+        .map((o) => o.trim())
+        .filter((o) => o.startsWith('http://') || o.startsWith('https://'))
+    )
+    .refine((arr) => arr.length > 0, 'No valid ALLOWED_ORIGINS found'),
   SALT_ROUNDS: z.coerce.number().default(10),
   JWT_SECRET: z
     .string()
@@ -41,8 +46,7 @@ const parsed = envSchema.safeParse(process.env);
 
 if (!parsed.success) {
   console.error('Environment validation failed. Check the following fields:');
-  const issues = parsed.error.issues.map((i) => i.path.join('.'));
-  console.error(issues.join(', '));
+  console.error(parsed.error.issues);
   process.exit(1);
 }
 
