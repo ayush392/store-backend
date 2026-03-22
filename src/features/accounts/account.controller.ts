@@ -68,5 +68,15 @@ export const accountController = {
       statusCode: 200,
       data
     });
+  },
+
+  basicProfile: async (req: Request, res: Response) => {
+    const accountId = parseBody(req.params.accountId, ObjectIdSchema);
+    const data = await accountService.basicProfile(accountId);
+
+    return successResponse(res, {
+      statusCode: 200,
+      data
+    });
   }
 };

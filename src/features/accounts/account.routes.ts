@@ -13,6 +13,7 @@ accountRoutes.use(requireRole([Auth.UserRoleEnum.enum.OWNER]));
 accountRoutes.get('/', accountController.getAccount);
 accountRoutes.post('/', accountController.createAccount);
 accountRoutes.get('/:accountId', accountController.userProfile);
+accountRoutes.get('/:accountId/basic', accountController.basicProfile);
 accountRoutes.patch('/:accountId', accountController.updateAccount);
 accountRoutes.patch('/:accountId/activate', accountController.activateAccount);
 accountRoutes.delete('/:accountId', accountController.deleteAccount);

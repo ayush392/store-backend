@@ -162,5 +162,17 @@ export const accountService = {
       ...(profile.accountType === 'STAFF' && { employment }),
       transactions
     };
+  },
+  basicProfile: async (accountId: ObjectId) => {
+    const profile = await accountModel
+      .findById(accountId)
+      .select('name displayName accountType currentOutstanding')
+      .lean();
+
+    if (!profile) {
+      throw new NotFoundError('Account of given ID not found');
+    }
+
+    return profile;
   }
 };
