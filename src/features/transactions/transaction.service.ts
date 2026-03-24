@@ -183,7 +183,7 @@ export const transactionService = {
   recent: async () => {
     const { startDate, endDate } = getDateRange('today');
 
-    const transactions = await transactionModel
+    const transactionsRaw = await transactionModel
       .find({
         date: { $gte: startDate, $lt: endDate },
         isDeleted: false
@@ -196,6 +196,11 @@ export const transactionService = {
       })
       .sort({ date: -1 })
       .lean();
+
+    const transactions = transactionsRaw.map(({ accountId, ...rest }) => ({
+      ...rest,
+      account: accountId
+    }));
 
     return transactions;
   },
