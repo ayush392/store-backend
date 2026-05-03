@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ObjectIdSchema, PhoneSchema } from './common.schema.js';
+import { ObjectIdSchema, PhoneSchema } from '../../shared/schemas.js';
 
 export const AccountTypeEnum = z.enum(['CUSTOMER', 'STORE', 'STAFF']);
 

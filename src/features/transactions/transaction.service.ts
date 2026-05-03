@@ -1,4 +1,3 @@
-import { CreateTransaction, UpdateTransaction } from '@store/schemas';
 import transactionModel from '../../models/transaction.model.js';
 import transactionHistoryModel from '../../models/transactionHistory.model.js';
 import { BadRequestError, NotFoundError } from '../../shared/appErrors.js';
@@ -13,6 +12,7 @@ import { removeUndefined } from '../../shared/removeUndefined.js';
 import { ObjectId, ObjectIdSchema } from '../../shared/schemas.js';
 import { runTransaction } from '../../utils/runTransaction.js';
 import { accountService } from '../accounts/account.service.js';
+import { CreateTransaction, UpdateTransaction } from './transaction.schema.js';
 
 export const transactionService = {
   create: async (createdBy: ObjectId, transaction: CreateTransaction) => {
@@ -109,7 +109,7 @@ export const transactionService = {
       );
 
       await accountService.updateOutstanding(
-        { accountId: existingTransaction.accountId.toString(), diffAmount },
+        { accountId: existingTransaction.accountId, diffAmount },
         session
       );
 
@@ -167,7 +167,7 @@ export const transactionService = {
 
       const newOutstanding = await accountService.updateOutstanding(
         {
-          accountId: transaction.accountId.toString(),
+          accountId: transaction.accountId,
           diffAmount: -1 * transaction.amountChange // -1 because amount needs to be reversed
         },
         session
@@ -247,7 +247,7 @@ export const transactionService = {
       }
 
       const effect = TRANSACTION_EFFECT[transactionType];
-      if (effect === 0) continue;
+      if (!effect || effect === 0) continue;
 
       if (effect < 0) result[key].credit += amount;
       else result[key].debit += amount;

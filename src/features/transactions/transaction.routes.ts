@@ -1,13 +1,13 @@
-import { Auth } from '@store/schemas';
 import { Router } from 'express';
 import { requireAuth } from '../../middlewares/auth.middleware.js';
 import { requireRole } from '../../middlewares/rbac.middleware.js';
 import { transactionController } from './transaction.controller.js';
+import { UserRoleEnum } from '../auth/auth.schema.js';
 
 const transRoutes = Router();
 
 transRoutes.use(requireAuth);
-transRoutes.use(requireRole([Auth.UserRoleEnum.enum.OWNER]));
+transRoutes.use(requireRole([UserRoleEnum.enum.OWNER]));
 
 transRoutes.post('/', transactionController.createTransaction);
 transRoutes.get('/recent', transactionController.recentTransactions);

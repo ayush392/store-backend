@@ -1,5 +1,5 @@
-import { Staff } from '@store/schemas';
 import mongoose, { InferSchemaType } from 'mongoose';
+import { SalaryTypeEnum } from '../features/staff/staff.schema.js';
 
 const employmentSchema = new mongoose.Schema(
   {
@@ -10,7 +10,7 @@ const employmentSchema = new mongoose.Schema(
     },
     salaryType: {
       type: String,
-      enum: Staff.SalaryTypeEnum.options,
+      enum: SalaryTypeEnum.options,
       required: true
     },
     salary: {

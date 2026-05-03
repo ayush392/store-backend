@@ -1,5 +1,5 @@
-import { Staff } from '@store/schemas';
 import mongoose, { InferSchemaType } from 'mongoose';
+import { AttendanceStatusEnum } from '../features/staff/staff.schema.js';
 
 const attendanceSchema = new mongoose.Schema(
   {
@@ -19,7 +19,7 @@ const attendanceSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: Staff.AttendanceStatusEnum.options,
+      enum: AttendanceStatusEnum.options,
       required: true
     }
   },

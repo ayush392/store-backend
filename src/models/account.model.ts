@@ -1,5 +1,5 @@
-import { Account } from '@store/schemas';
 import mongoose, { InferSchemaType } from 'mongoose';
+import { AccountTypeEnum } from '../features/accounts/account.schema.js';
 
 const accountSchema = new mongoose.Schema(
   {
@@ -34,7 +34,7 @@ const accountSchema = new mongoose.Schema(
     accountType: {
       type: String,
       required: true,
-      enum: Account.AccountTypeEnum.options
+      enum: AccountTypeEnum.options
     },
     currentOutstanding: {
       type: Number,

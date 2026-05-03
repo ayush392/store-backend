@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/ayush392/store-backend#readme",
   "dependencies": {
-    "@store/schemas": "workspace:*",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",

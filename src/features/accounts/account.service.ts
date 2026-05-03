@@ -4,7 +4,7 @@ import type {
   CreateAccount,
   UpdateAccount,
   UpdateOutstanding
-} from '@store/schemas';
+} from './account.schema.js';
 import { ClientSession } from 'mongoose';
 import accountModel from '../../models/account.model.js';
 import employmentModel, { Employment } from '../../models/employment.model.js';

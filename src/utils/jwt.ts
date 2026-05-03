@@ -1,12 +1,12 @@
-import { Auth } from '@store/schemas';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 import { env } from '../config/env.js';
 import { UnauthorizedError } from '../shared/appErrors.js';
+import { UserRoleEnum } from '../features/auth/auth.schema.js';
 
 export const JwtPayloadSchema = z.object({
   sub: z.string(), // user id
-  role: Auth.UserRoleEnum,
+  role: UserRoleEnum,
   iat: z.number().optional(),
   exp: z.number().optional()
 });

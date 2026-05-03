@@ -1,14 +1,14 @@
-import { Auth } from '@store/schemas';
 import { Router } from 'express';
 import { requireAuth } from '../../middlewares/auth.middleware.js';
 import { requireRole } from '../../middlewares/rbac.middleware.js';
 import { accountController } from './account.controller.js';
+import { UserRoleEnum } from '../auth/auth.schema.js';
 
 const accountRoutes = Router();
 
 accountRoutes.use(requireAuth);
 
-accountRoutes.use(requireRole([Auth.UserRoleEnum.enum.OWNER]));
+accountRoutes.use(requireRole([UserRoleEnum.enum.OWNER]));
 
 accountRoutes.get('/', accountController.getAccount);
 accountRoutes.post('/', accountController.createAccount);

@@ -1,6 +1,6 @@
-import { Common } from '@store/schemas';
 import { logger } from '../utils/logger.js';
 import { BadRequestError } from './appErrors.js';
+import { DateOnlySchema } from './schemas.js';
 
 const IST_FORMATTER = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Kolkata',
@@ -14,7 +14,7 @@ export const istDateString = (date = new Date()) => {
 };
 
 export const parseISTDate = (dateStr?: string): Date => {
-  return Common.DateOnlySchema.parse(dateStr ?? istDateString());
+  return DateOnlySchema.parse(dateStr ?? istDateString());
 };
 const addDays = (date: Date, days: number) => {
   const d = new Date(date);

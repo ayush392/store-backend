@@ -3,9 +3,8 @@ import {
   AttendanceQuery,
   BulkAttendance,
   CreateEmployment,
-  CreateStaff,
-  DateOnly
-} from '@store/schemas';
+  CreateStaff
+} from './staff.schema.js';
 import { ClientSession } from 'mongoose';
 import accountModel from '../../models/account.model.js';
 import attendanceModel from '../../models/attendance.model.js';
@@ -17,7 +16,7 @@ import {
   parseISTDate
 } from '../../shared/date.js';
 import { parseBody } from '../../shared/parseBody.js';
-import { ObjectId, ObjectIdSchema } from '../../shared/schemas.js';
+import { DateOnly, ObjectId, ObjectIdSchema } from '../../shared/schemas.js';
 import { runTransaction } from '../../utils/runTransaction.js';
 import { accountService } from '../accounts/account.service.js';
 

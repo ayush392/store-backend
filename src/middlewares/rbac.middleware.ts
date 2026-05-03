@@ -1,6 +1,6 @@
-import { Auth, UserRole } from '@store/schemas';
 import { NextFunction, Request, Response } from 'express';
 import { ForbiddenError, UnauthorizedError } from '../shared/appErrors.js';
+import { UserRole, UserRoleEnum } from '../features/auth/auth.schema.js';
 
 export const requireRole = (allowedRoles: UserRole[]) => {
   return (req: Request, _res: Response, next: NextFunction) => {
@@ -9,7 +9,7 @@ export const requireRole = (allowedRoles: UserRole[]) => {
     const userRole = req.user.role;
 
     // Admin has all the permissions
-    if (userRole === Auth.UserRoleEnum.enum.ADMIN) {
+    if (userRole === UserRoleEnum.enum.ADMIN) {
       return next();
     }
 

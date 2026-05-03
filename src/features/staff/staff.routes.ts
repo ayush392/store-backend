@@ -1,13 +1,13 @@
-import { Auth } from '@store/schemas';
 import { Router } from 'express';
 import { requireAuth } from '../../middlewares/auth.middleware.js';
 import { requireRole } from '../../middlewares/rbac.middleware.js';
 import { staffController } from './staff.controller.js';
+import { UserRoleEnum } from '../auth/auth.schema.js';
 
 const staffRoutes = Router();
 
 staffRoutes.use(requireAuth);
-staffRoutes.use(requireRole([Auth.UserRoleEnum.enum.OWNER]));
+staffRoutes.use(requireRole([UserRoleEnum.enum.OWNER]));
 
 staffRoutes.get('/', staffController.getStaffs);
 staffRoutes.post('/', staffController.createStaffWithEmployment);

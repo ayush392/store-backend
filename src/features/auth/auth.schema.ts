@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PhoneSchema } from './common.schema.js';
+import { PhoneSchema } from '../../shared/schemas.js';
 
 export const UserRoleEnum = z.enum(['ADMIN', 'OWNER', 'STAFF', 'USER']);
 
