@@ -7,6 +7,7 @@ import staffRoutes from './features/staff/staff.routes.js';
 import transRoutes from './features/transactions/transaction.routes.js';
 import { errorMiddleware } from './middlewares/error.middleware.js';
 import { successResponse } from './shared/successResponse.js';
+import { ForbiddenError } from './shared/appErrors.js';
 
 const app = express();
 
@@ -15,19 +16,19 @@ const corsOptions: CorsOptions = {
     if (!origin || env.ALLOWED_ORIGINS.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+      callback(new ForbiddenError(`CORS policy: Origin ${origin} not allowed`));
     }
   },
   credentials: true
 };
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 app.get('/', (_req, res) => {
   successResponse(res, { message: 'server is up and running!' });
 });
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/account', accountRoutes);
