@@ -7,7 +7,6 @@ import {
   TRANSACTION_EFFECT
 } from '../../shared/constant.js';
 import { getDateRange, istDateString } from '../../shared/date.js';
-import { parseBody } from '../../shared/parseBody.js';
 import { removeUndefined } from '../../shared/removeUndefined.js';
 import { ObjectId, ObjectIdSchema } from '../../shared/schemas.js';
 import { runTransaction } from '../../utils/runTransaction.js';
@@ -17,14 +16,11 @@ import { CreateTransaction, UpdateTransaction } from './transaction.schema.js';
 export const transactionService = {
   create: async (createdBy: ObjectId, transaction: CreateTransaction) => {
     const { accountId, transactionType, amount, date, note } = transaction;
-    const accountIdObj = parseBody(accountId, ObjectIdSchema);
+
     const result = await runTransaction(async (session) => {
-      const account = await accountService.findAccountByIdAndType(
-        accountIdObj,
-        {
-          session
-        }
-      );
+      const account = await accountService.findAccountByIdAndType(accountId, {
+        session
+      });
       if (!account) throw new NotFoundError('Account not found');
 
       if (

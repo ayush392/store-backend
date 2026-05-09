@@ -15,7 +15,6 @@ import {
   getMonthRange,
   parseISTDate
 } from '../../shared/date.js';
-import { parseBody } from '../../shared/parseBody.js';
 import { DateOnly, ObjectId, ObjectIdSchema } from '../../shared/schemas.js';
 import { runTransaction } from '../../utils/runTransaction.js';
 import { accountService } from '../accounts/account.service.js';
@@ -260,7 +259,7 @@ export const staffService = {
           },
           update: {
             $set: { status: a.status },
-            $setOnInsert: { accountId: parseBody(a.accountId, ObjectIdSchema) }
+            $setOnInsert: { accountId: a.accountId }
           },
           upsert: true
         }
