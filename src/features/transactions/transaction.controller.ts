@@ -79,6 +79,14 @@ export const transactionController = {
     });
   },
 
+  basicTransactionDetails: async (req: Request, res: Response) => {
+    const transactionId = parseBody(req.params.transactionId, ObjectIdSchema);
+    const data =
+      await transactionService.basicTransactionDetails(transactionId);
+
+    return successResponse(res, { statusCode: 200, data });
+  },
+
   transactionGraph: async (_req: Request, res: Response) => {
     const data = await transactionService.transactionOverview();
 

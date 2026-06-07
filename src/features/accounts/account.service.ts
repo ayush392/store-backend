@@ -47,7 +47,7 @@ export const accountService = {
       {
         $inc: { currentOutstanding: diffAmount }
       },
-      { new: true, session }
+      { returnDocument: 'after', session }
     );
 
     if (!updatedAccount) throw new NotFoundError('Account not found');

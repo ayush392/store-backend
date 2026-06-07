@@ -12,6 +12,10 @@ transRoutes.use(requireRole([UserRoleEnum.enum.OWNER]));
 transRoutes.post('/', transactionController.createTransaction);
 transRoutes.get('/recent', transactionController.recentTransactions);
 transRoutes.get('/graph', transactionController.transactionGraph);
+transRoutes.get(
+  '/:transactionId/basic',
+  transactionController.basicTransactionDetails
+);
 transRoutes.patch('/:transactionId', transactionController.editTransaction);
 transRoutes.delete('/:transactionId', transactionController.deleteTransaction);
 transRoutes.get('/:transactionId', transactionController.transactionHistory);

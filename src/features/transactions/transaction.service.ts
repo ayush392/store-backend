@@ -223,6 +223,19 @@ export const transactionService = {
     return editHistory;
   },
 
+  basicTransactionDetails: async (transactionId: ObjectId) => {
+    const transaction = await transactionModel
+      .findById(transactionId)
+      .select('accountId transactionType amount date note updatedAt')
+      .lean();
+
+    if (!transaction) {
+      throw new NotFoundError('Transaction with given Id not found');
+    }
+
+    return transaction;
+  },
+
   transactionOverview: async () => {
     const { startDate, endDate } = getDateRange('week');
     const transactions = await transactionModel
