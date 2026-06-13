@@ -99,7 +99,7 @@ export const accountService = {
     const updatedAccount = await accountModel.findByIdAndUpdate(
       accountId,
       { $set: dataToUpdate },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
 
     if (!updatedAccount) {
@@ -166,7 +166,9 @@ export const accountService = {
   basicProfile: async (accountId: ObjectId) => {
     const profile = await accountModel
       .findById(accountId)
-      .select('name displayName accountType currentOutstanding')
+      .select(
+        'name displayName accountType currentOutstanding phone address notes'
+      )
       .lean();
 
     if (!profile) {
