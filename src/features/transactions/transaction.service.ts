@@ -15,7 +15,8 @@ import { CreateTransaction, UpdateTransaction } from './transaction.schema.js';
 
 export const transactionService = {
   create: async (createdBy: ObjectId, transaction: CreateTransaction) => {
-    const { accountId, transactionType, amount, date, note } = transaction;
+    const { accountId, transactionType, amount, date, note, images } =
+      transaction;
 
     const result = await runTransaction(async (session) => {
       const account = await accountService.findAccountByIdAndType(accountId, {
@@ -42,7 +43,8 @@ export const transactionService = {
             date,
             note,
             amountChange: diffAmount,
-            createdBy
+            createdBy,
+            images
           }
         ],
         { session }
@@ -204,7 +206,7 @@ export const transactionService = {
   getTransactions: async (accountId: ObjectId) => {
     const transactions = await transactionModel
       .find({ accountId, isDeleted: false })
-      .sort({ date: -1 })
+      .sort({ date: -1, createdAt: -1 })
       .lean();
     return transactions;
   },

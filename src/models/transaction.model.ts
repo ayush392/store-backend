@@ -1,6 +1,20 @@
 import mongoose from 'mongoose';
 import { TransactionTypeEnum } from '../features/transactions/transaction.schema.js';
 
+const imageSchema = new mongoose.Schema(
+  {
+    publicId: {
+      type: String,
+      required: true
+    },
+    url: {
+      type: String,
+      required: true
+    }
+  },
+  { _id: false }
+);
+
 const transactionSchema = new mongoose.Schema(
   {
     accountId: {
@@ -39,7 +53,9 @@ const transactionSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
       default: false
-    }
+    },
+    //bill images
+    images: [imageSchema]
   },
   { timestamps: true }
 );

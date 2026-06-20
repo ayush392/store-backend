@@ -39,7 +39,11 @@ const envSchema = z.object({
     .refine(
       (v) => v.startsWith('mongodb://') || v.startsWith('mongodb+srv://'),
       { message: 'Invalid MongoDB connection string' }
-    )
+    ),
+
+  CLOUDINARY_CLOUD_NAME: z.string().min(2, 'Cloudinary cloud name is required'),
+  CLOUDINARY_API_KEY: z.string().min(2, 'Cloudinary API key is required'),
+  CLOUDINARY_API_SECRET: z.string().min(2, 'Cloudinary API secret is required')
 });
 
 const parsed = envSchema.safeParse(process.env);

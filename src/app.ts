@@ -8,6 +8,7 @@ import transRoutes from './features/transactions/transaction.routes.js';
 import { errorMiddleware } from './middlewares/error.middleware.js';
 import { successResponse } from './shared/successResponse.js';
 import { ForbiddenError } from './shared/appErrors.js';
+import miscRoutes from './features/misc/misc.route.js';
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/account', accountRoutes);
 app.use('/api/v1/transaction', transRoutes);
 app.use('/api/v1/staff', staffRoutes);
+app.use('/api/v1', miscRoutes);
 
 app.use(errorMiddleware);
 
