@@ -186,13 +186,13 @@ export const transactionService = {
         date: { $gte: startDate, $lt: endDate },
         isDeleted: false
       })
-      .select('accountId transactionType amountChange amount date')
+      .select('accountId transactionType amountChange amount date images')
       .populate({
         path: 'accountId',
         model: 'Account',
         select: 'name displayName phone accountType currentOutstanding isActive'
       })
-      .sort({ date: -1 })
+      .sort({ date: -1, createdAt: -1 })
       .lean();
 
     const transactions = transactionsRaw.map(({ accountId, ...rest }) => ({
